@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "the-project"
+version = "0.1.0"
+description = "yet another poc"
+authors = ["pp@neatnet.tech"]
+readme = "README.md"
+packages = [{ include = "app" }]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+sqlalchemy = ">=2.0.40,<3.0.0"
+dependency-injector = ">=4.46.0,<5.0.0"
+python-dotenv = ">=1.1.0,<2.0.0"
+transitions = ">=0.9.2,<0.10.0"
+faker = ">=37.1.0,<38.0.0"
+pytest = ">=8.3.5,<9.0.0"
+pytest-bdd = ">=8.1.0,<9.0.0"
+psycopg2-binary = ">=2.9.10,<3.0.0"
+uvicorn = { extras = ["standard"], version = ">=0.34.1,<0.35.0" }
+fastapi = ">=0.115.12,<0.116.0"
+python-multipart = ">=0.0.20,<0.0.21"
+requests = ">=2.32.3,<3.0.0"
+
+[tool.poetry.group.dev.dependencies]
+debugpy = "^1.8.14"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

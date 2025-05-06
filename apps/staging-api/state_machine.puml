@@ -1,0 +1,16 @@
+@startuml
+state "initiated" as initiated
+state "pending review" as pending_review
+state "under review" as under_review
+state "accepted" as accepted
+state "rejected" as rejected
+
+[*] --> initiated
+
+initiated --> pending_review : submit
+pending_review --> under_review : start_review
+pending_review --> accepted : approve
+pending_review --> rejected : reject
+under_review --> accepted : approve
+under_review --> rejected : reject
+@enduml

@@ -1,0 +1,4 @@
+name,node_type,identifier,identifier_type,market_code,region_code,effective_date,ref_data_key,ref_data_value,clears_through,currency,cut_off_time
+Deutsche Bank,organization,DEUTDEFF,SWIFT,SEPA,DE,2021-01-01,bank_type,clearing,,,
+Credit Agricole,organization,AGRIFRPP,SWIFT,SEPA,FR,2021-01-01,bank_type,participant,DEUTDEFF,EUR,15:00 CET
+Santander Bank,organization,BSCHESMM,SWIFT,SEPA,ES,2021-01-01,bank_type,participant,DEUTDEFF,EUR,16:00 CET
