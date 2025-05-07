@@ -12,11 +12,11 @@ class StagingCommandHandler:
 
     def transition_staging(self, command: TransitionCommand) -> Staging:
         change = (
-            self.db.query(Staging).filter_by(record_key=command.change_id).first()
+            self.db.query(Staging).filter_by(record_id=command.record_id).first()
         )
 
         if not change:
-            raise ValueError(f"Staging change with ID {command.change_id} not found.")
+            raise ValueError(f"Staging change with ID {command.record_id} not found.")
 
         new_status = self.workflow_service.transition(change.status, command.action)
         new_rev = self._create_revision(change, new_status)
@@ -28,12 +28,12 @@ class StagingCommandHandler:
     def _create_revision(self, prev: Staging, status: Status) -> Staging:
         return Staging(
             changeset_id=prev.changeset_id,
-            record_key=prev.record_key,
+            record_id=prev.record_id,
             directory=prev.directory,
             action=prev.action,
-            new_data=prev.new_data,
+            market_record_json_new=prev.market_record_json_new,
             change_source=prev.change_source,
             status=status,
-            current_revision=prev.current_revision + 1,
+            revision=prev.revision + 1,
             created_at=datetime.now(UTC),
         )

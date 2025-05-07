@@ -43,10 +43,10 @@ def import_directory(
     return {"message": f"Data imported for directory {directory_name}"}
 
 
-@staging_router.post("/{change_id}/transition")
+@staging_router.post("/{record_id}/transition")
 @inject
 def transition_staging_change(
-    change_id: str,
+    record_id: str,
     body: dict = Body(...),
     handler: StagingCommandHandler = Depends(
         Provide[Container.staging_command_handler]
@@ -61,7 +61,7 @@ def transition_staging_change(
 
     try:
         command = TransitionCommand(
-            change_id=change_id,
+            record_id=record_id,
             action=action,
             created_by=created_by,
             business_justification=business_justification,
@@ -70,7 +70,7 @@ def transition_staging_change(
         result = handler.transition_staging(command)
 
         return {
-            "change_id": change_id,
+            "record_id": record_id,
             "new_status": result.status.value,
             "created_by": created_by,
             "business_justification": business_justification,

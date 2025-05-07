@@ -15,15 +15,6 @@ from staging.middleware.logging import LoggingMiddleware
 from staging.config import settings
 
 # ─────────────────────────────────────────────────────────────
-# App debug
-# ─────────────────────────────────────────────────────────────
-if os.getenv("DEBUGPY", "0") == "1":
-    import debugpy
-
-    debugpy.listen(("0.0.0.0", 5678))
-
-
-# ─────────────────────────────────────────────────────────────
 # Application startup/shutdown lifecycle hook
 # ─────────────────────────────────────────────────────────────
 @asynccontextmanager

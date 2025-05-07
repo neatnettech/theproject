@@ -25,6 +25,8 @@ class BaseConfig(BaseSettings):
 
 class DevConfig(BaseConfig):
     DEBUG: bool = True
+    DEBUGPY: int = 1
+    WORKERS: int = 1
     ENV: str = "dev"
     # Redis (used for rate limiting, if we decide to)
     # REDIS_URL: str = "redis://localhost:6379/0"

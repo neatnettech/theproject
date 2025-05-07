@@ -21,6 +21,7 @@ Base = declarative_base()
 
 # directory specific
 
+
 class ThomsonRecord(BaseModel):
     file_key: str
     other_data: Dict[str, Any]
