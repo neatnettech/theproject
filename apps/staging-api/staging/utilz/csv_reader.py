@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 from typing import List
-from staging.models.core_model import MarketRecord, ThomsonRecord
+from staging.models import MarketRecord, ThomsonRecord
 
 
 def parse_market_directory_json(file_path: str) -> List[MarketRecord]:

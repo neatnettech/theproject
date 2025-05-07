@@ -1,5 +1,4 @@
 from sqlalchemy import (
-    create_engine,
     Column,
     String,
     Integer,
@@ -9,7 +8,7 @@ from sqlalchemy import (
     Boolean,
     Enum,
 )
-from sqlalchemy.orm import relationship, Session, declarative_base, sessionmaker
+from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from datetime import datetime, UTC
@@ -21,7 +20,6 @@ from pydantic import BaseModel
 Base = declarative_base()
 
 # directory specific
-
 
 class ThomsonRecord(BaseModel):
     file_key: str
@@ -178,7 +176,7 @@ class Status(enum.Enum):
 
 
 class ChangeSource(enum.Enum):
-    THOMPON = "THOMSON"
+    THOMSON = "THOMSON"
     IDALL = "IDALL"
     USER = "USER"
 

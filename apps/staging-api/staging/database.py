@@ -25,7 +25,7 @@ def init_db(engine=None):
 
 
 def seed_db(engine=None):
-    from staging.models.core_model import MarketRecord
+    from staging.models import MarketRecord
     import uuid
 
     if engine is None:

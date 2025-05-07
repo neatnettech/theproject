@@ -1,3 +1,5 @@
+from transitions import Machine
+
 states = [
     "initiated",
     "pending review",
@@ -12,3 +14,14 @@ transitions = [
     {"trigger": "approve", "source": ["pending review", "under review"], "dest": "accepted"},
     {"trigger": "reject", "source": ["pending review", "under review"], "dest": "rejected"},
 ]
+
+class StagingWorkflow:
+    def __init__(self, initial_state: str):
+        self.state = initial_state
+        self.machine = Machine(
+            model=self,
+            states=states,
+            transitions=transitions,
+            initial=self.state,
+            auto_transitions=False,
+        )

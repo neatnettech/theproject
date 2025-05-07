@@ -1,7 +1,7 @@
 from datetime import UTC, datetime
 from sqlalchemy.orm import Session
 from staging.commands.staging_commands import TransitionCommand
-from staging.models.core_model import Staging, Status
+from staging.models import Staging, Status
 from staging.services.staging_workflow_service import StagingWorkflowService
 
 

@@ -1,5 +1,5 @@
-from staging.state.staging_state_machine import StagingWorkflow
-from staging.models.core_model import Staging, Status
+from staging.state_machine import StagingWorkflow
+from staging.models import Staging, Status
 
 
 class StagingWorkflowService:

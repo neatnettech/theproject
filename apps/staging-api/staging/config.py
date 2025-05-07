@@ -26,8 +26,8 @@ class BaseConfig(BaseSettings):
 class DevConfig(BaseConfig):
     DEBUG: bool = True
     ENV: str = "dev"
-    # Redis (used for rate limiting)
-    REDIS_URL: str = "redis://localhost:6379/0"
+    # Redis (used for rate limiting, if we decide to)
+    # REDIS_URL: str = "redis://localhost:6379/0"
     DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/the_project_db"
     class Config:
         env_file = ".env"

@@ -1,6 +1,6 @@
 # /app/services/projection_service.py
 from staging.repositories.staging_repository import StagingRepository
-from staging.models.core_model import ActionType, ThomsonRecord
+from staging.models import ActionType, ThomsonRecord
 
 class ProjectionService:
     def __init__(self, staging_repository: StagingRepository):

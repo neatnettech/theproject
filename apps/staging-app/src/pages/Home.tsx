@@ -19,7 +19,7 @@ export default function Home() {
     const fetchChanges = async () => {
       try {
         const res = await fetch(
-          "http://127.0.0.1:8000/api/v1/staging/staging/changes"
+          "http://127.0.0.1:8000/api/v1/staging/changes"
         );
         if (res.ok) {
           const json = await res.json();

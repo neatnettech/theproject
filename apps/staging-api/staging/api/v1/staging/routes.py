@@ -81,7 +81,7 @@ def transition_staging_change(
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@staging_router.get("/changeset/{changeset_id}/{record_id}/projection")
+@staging_router.get("/changeset/{changeset_id}/record/{record_id}/projection")
 @inject
 def get_manifest_projection(
     changeset_id: str,
@@ -102,7 +102,7 @@ def get_manifest_projection(
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@staging_router.get("/staging/changes", tags=["staging"])
+@staging_router.get("/changes", tags=["staging"])
 @inject
 def get_all_staging_changes(
     handler: StagingQueryHandler = Depends(Provide[Container.staging_query_handler]),

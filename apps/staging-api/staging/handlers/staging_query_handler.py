@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from staging.models.core_model import Staging
+from staging.models import Staging
 from staging.queries.staging_queries import GetStagingQuery, GetAllStagingChangesQuery
 from typing import List
 

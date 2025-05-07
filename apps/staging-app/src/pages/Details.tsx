@@ -16,7 +16,7 @@ export default function Details() {
     const fetchProjection = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/api/v1/staging/changeset/${changeset_id}/${record_id}/projection`
+          `http://127.0.0.1:8000/api/v1/staging/changeset/${changeset_id}/record/${record_id}/projection`
         );
         if (!res.ok) throw new Error(await res.text());
         const json = await res.json();

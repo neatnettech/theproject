@@ -1,8 +1,8 @@
 import uuid
 from sqlalchemy.orm import Session
-from staging.models.core_model import ActionType, Status, Staging, ThomsonRecord
+from staging.models import ActionType, Status, Staging, ThomsonRecord
 from typing import Tuple, List, Dict
-from staging.models.core_model import MarketRecord
+from staging.models import MarketRecord
 from dependency_injector.wiring import inject, Provide
 from staging.containers import Container
 from staging.utilz.csv_reader import parse_market_directory_json
@@ -33,7 +33,7 @@ def process_directory_file(
             .first()
         )
         new_revision = current.revision + 1 if current else 1
-        
+
         # Wrap as ThomsonRecord for JSON projection
         record_json = ThomsonRecord.from_raw(rec.record_value).dict()
 
