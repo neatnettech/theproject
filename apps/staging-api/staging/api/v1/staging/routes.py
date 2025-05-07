@@ -10,8 +10,9 @@ from staging.acquisition.importer import process_directory_file
 from staging.queries.staging_queries import GetStagingQuery, GetAllStagingChangesQuery
 from staging.handlers.projection_command_handler import ProjectionQueryHandler
 
-staging_router = APIRouter()
-
+staging_router = APIRouter(
+    prefix="/staging", tags=["staging"]
+)
 
 @staging_router.get("/")
 def index():

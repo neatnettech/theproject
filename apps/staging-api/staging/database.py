@@ -1,14 +1,15 @@
 # app/db.py
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from staging.config import Config
+from staging.config import settings
 from staging.models import Base
-import logging 
+import structlog
 
-logger = logging.getLogger("staging")
+logger = structlog.get_logger()
+
 
 def get_engine():
-    return create_engine(Config.SQLALCHEMY_DATABASE_URI)
+    return create_engine(settings.DATABASE_URL)
 
 
 def get_session_factory(engine=None):

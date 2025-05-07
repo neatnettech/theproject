@@ -1,30 +1,28 @@
+# logging_setup.py
+import structlog
 import logging
-from logging.handlers import RotatingFileHandler
-import os
+import sys
+from structlog.stdlib import LoggerFactory
+from structlog.processors import JSONRenderer, TimeStamper, add_log_level, format_exc_info
+from structlog.contextvars import merge_contextvars
 
-LOG_DIR = os.path.join(os.path.dirname(__file__), "../logs")
-os.makedirs(LOG_DIR, exist_ok=True)
+def setup_logger():
+    logging.basicConfig(
+        format="%(message)s",
+        stream=sys.stdout,
+        level=logging.INFO,
+    )
 
-def setup_logger(name: str = "app", level: str = "INFO") -> logging.Logger:
-    logger = logging.getLogger(name)
-    logger.setLevel(level.upper())
+    structlog.configure(
+        processors=[
+            merge_contextvars,
+            add_log_level,
+            TimeStamper(fmt="iso"),
+            format_exc_info,
+            JSONRenderer()
+        ],
+        logger_factory=LoggerFactory(),
+        cache_logger_on_first_use=True,
+    )
 
-    if not logger.handlers:
-        formatter = logging.Formatter(
-            "[%(asctime)s] [%(levelname)s] [%(name)s] - %(message)s",
-            "%Y-%m-%d %H:%M:%S"
-        )
-
-        console_handler = logging.StreamHandler()
-        console_handler.setFormatter(formatter)
-        logger.addHandler(console_handler)
-
-        file_handler = RotatingFileHandler(
-            os.path.join(LOG_DIR, f"{name}.log"),
-            maxBytes=5 * 1024 * 1024,  # 5MB
-            backupCount=5
-        )
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
-
-    return logger
+    return structlog.get_logger()
