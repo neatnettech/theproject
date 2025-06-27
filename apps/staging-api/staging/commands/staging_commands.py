@@ -2,7 +2,8 @@ from dataclasses import dataclass
 
 @dataclass
 class TransitionCommand:
-    record_id: int
+    record: str
+    changeset: str
     action: str
     created_by: str = "system"
     business_justification: str = "No justification provided"

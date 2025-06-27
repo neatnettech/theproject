@@ -1,4 +1,4 @@
-from app.database import get_engine, get_session_factory, init_db
+from staging.database import get_engine, get_session_factory, init_db
 from staging.models import (
     MarketRecord,
     ThomsonRecord,

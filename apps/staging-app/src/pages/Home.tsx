@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-table";
 import type { StagingChange } from "../types";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { StagingTitle } from "@repo/ui";
 
 export default function Home() {
   const [changes, setChanges] = useState<StagingChange[]>([]);
@@ -119,6 +120,9 @@ export default function Home() {
   return (
     <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
       <h1>Staging Table</h1>
+      <StagingTitle>
+        Test
+      </StagingTitle>
 
       {loading && <p>Checking backend...</p>}
       {!loading && backendOk && (

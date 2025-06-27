@@ -1,14 +1,14 @@
 from sqlalchemy.orm import Session
-from staging.models import Staging
-from staging.queries.staging_queries import GetStagingQuery, GetAllStagingChangesQuery
+from staging.models import Acceptance, Staging
+from staging.queries.staging_queries import GetAcceptanceQuery, GetAllAcceptanceChangesQuery
 from typing import List
 
 
-class StagingQueryHandler:
+class AcceptanceQueryHandler:
     def __init__(self, db: Session):
         self.db = db
 
-    def handle_get_staging(self, query: GetStagingQuery) -> list[Staging]:
+    def handle_get_acceptance(self, query: GetAcceptanceQuery) -> list[Acceptance]:
         return (
             self.db.query(Staging)
             .filter(Staging.record_key == query.record_key)
@@ -16,7 +16,7 @@ class StagingQueryHandler:
             .all()
         )
         
-    def handle(self, query: GetAllStagingChangesQuery) -> List[Staging]:
+    def handle(self, query: GetAllAcceptanceChangesQuery) -> List[Staging]:
         return (
             self.db.query(Staging).all()
         )

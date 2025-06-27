@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
 @dataclass
-class GetStagingQuery:
+class GetAcceptanceQuery:
     record_key: str
     
 @dataclass(frozen=True)
-class GetAllStagingChangesQuery:
+class GetAllAcceptanceChangesQuery:
     pass

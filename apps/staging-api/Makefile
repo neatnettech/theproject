@@ -55,7 +55,7 @@ clean:
 
 
 seed-db:
-	PYTHONPATH=$(PYTHONPATH) poetry run python -c "from app.database import seed_db; seed_db()"
+	PYTHONPATH=$(PYTHONPATH) poetry run python -c "from staging.database import seed_db; seed_db()"
 
 
 # Drop all tables from PostgreSQL (DANGER: destructive!)

@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, Body
 from dependency_injector.wiring import inject, Provide
 from staging.commands.staging_commands import TransitionCommand, BuildProjectionCommand
 from staging.containers import Container
-from staging.handlers.staging_command_handler import StagingCommandHandler
+from staging.handlers.staging_command_handler import AcceptanceCommandHandler, StagingCommandHandler
 from staging.acquisition.importer import process_directory_file
 from staging.queries.staging_queries import GetStagingQuery, GetAllStagingChangesQuery
 from staging.handlers.projection_command_handler import ProjectionQueryHandler
@@ -43,12 +43,13 @@ def import_directory(
     return {"message": f"Data imported for directory {directory_name}"}
 
 
-@staging_router.post("/{record_id}/transition")
+@staging_router.post("/{record}/{changeset}/transition")
 @inject
 def transition_staging_change(
-    record_id: str,
+    record: str,
+    changeset: str,
     body: dict = Body(...),
-    handler: StagingCommandHandler = Depends(
+    handler: AcceptanceCommandHandler = Depends(
         Provide[Container.staging_command_handler]
     ),
 ):
@@ -61,7 +62,8 @@ def transition_staging_change(
 
     try:
         command = TransitionCommand(
-            record_id=record_id,
+            record=record,
+            changeset=changeset,
             action=action,
             created_by=created_by,
             business_justification=business_justification,
@@ -70,7 +72,8 @@ def transition_staging_change(
         result = handler.transition_staging(command)
 
         return {
-            "record_id": record_id,
+            "record": record,
+            "changeset": changeset,
             "new_status": result.status.value,
             "created_by": created_by,
             "business_justification": business_justification,

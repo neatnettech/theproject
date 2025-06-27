@@ -2,10 +2,10 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.models.core_model import Base
+from staging.models.core_model import Base
 from app import create_app
-from app.containers import Container
-from app.logging_config import setup_logger
+from staging.containers import Container
+from staging.logging_config import setup_logger
 
 # Shared test logger
 test_logger = setup_logger("test-suite", level="DEBUG")

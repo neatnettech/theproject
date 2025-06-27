@@ -183,15 +183,13 @@ class ChangeSource(enum.Enum):
 
 
 # The staging area table: each change (like a Git commit) is recorded here.
-class Staging(Base):
+class Acceptance(Base):
     __tablename__ = "staging"
     id = Column(Integer, primary_key=True)
-    changeset_id = Column(String, nullable=False)
-    record_id = Column(String, nullable=False)
+    changeset = Column(String, nullable=False)
+    record = Column(String, nullable=False)
     directory = Column(String, nullable=False)
     action = Column(Enum(ActionType), nullable=False)
-    market_record_json_new = Column(JSON, nullable=True)
-    market_record_json_gs = Column(JSON, nullable=True)
     change_source = Column(Enum(ChangeSource), nullable=False)
     status = Column(Enum(Status), default=Status.INITIATED, nullable=False)
     business_justification = Column(String, nullable=True)

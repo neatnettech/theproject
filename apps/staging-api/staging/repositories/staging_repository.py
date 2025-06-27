@@ -1,18 +1,17 @@
-# /app/repositories/staging_repository.py
-from staging.models import Staging
+from staging.models import Acceptance
 from sqlalchemy.orm import Session
 from typing import List
 
 
-class StagingRepository:
+class AcceptanceRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    def get_staging_events_by_manifest(self, changeset_id: str, record_id: str):
-        return self.db.query(Staging)\
-            .filter(Staging.changeset_id == changeset_id, Staging.record_id == record_id)\
-            .order_by(Staging.record_id.asc())\
+    def get_acceptance_events_by_manifest(self, changeset: str, record: str):
+        return self.db.query(Acceptance)\
+            .filter(Acceptance.changeset_id == changeset, Acceptance.record == record)\
+            .order_by(Acceptance.record.asc())\
             .all()
             
-    def get_all_changes(self) -> List[Staging]:
-        return self.db.query(Staging).order_by(Staging.created_at.desc()).all()
+    def get_all_changes(self) -> List[Acceptance]:
+        return self.db.query(Acceptance).order_by(Acceptance.created_at.desc()).all()
