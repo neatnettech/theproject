@@ -1,6 +1,6 @@
 
 from pydantic_settings import BaseSettings
-from typing import List
+from typing import List, Optional
 import os
 
 
@@ -13,6 +13,11 @@ class BaseConfig(BaseSettings):
     API_VERSION: str = "v1"
 
     ALLOWED_ORIGINS_RAW: str = ""
+
+    # Azure configuration
+    AZURE_CLIENT_ID: Optional[str] = None
+    AZURE_KEY_VAULT_URL: Optional[str] = None
+    USE_AZURE_AUTH: bool = False
 
     @property
     def ALLOWED_ORIGINS(self) -> List[str]:
@@ -38,6 +43,7 @@ class DevConfig(BaseConfig):
 class ProdConfig(BaseConfig):
     DEBUG: bool = False
     ENV: str = "prod"
+    USE_AZURE_AUTH: bool = True
 
 
 def get_settings():
