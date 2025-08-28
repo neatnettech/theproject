@@ -1,5 +1,5 @@
 {
-  "name": "mpd2",
+  "name": "theproject",
   "private": true,
   "scripts": {
     "build": "turbo run build",
